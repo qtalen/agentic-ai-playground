@@ -1,0 +1,93 @@
+from pprint import pprint
+import asyncio
+
+from dotenv import load_dotenv
+from tavily import AsyncTavilyClient
+from llama_index.llms.openai_like import OpenAILike
+from llama_index.core.workflow import Context
+from llama_index.core.agent.workflow import FunctionAgent, AgentWorkflow, AgentInput, AgentOutput
+
+from reordered_function_agent import ReorderedFunctionAgent
+
+load_dotenv("../.env")
+
+model_args = {
+    "is_chat_model": True,
+    "is_function_calling_model": True,
+    "temperature": 0.1,
+    "context_window": 8000
+}
+
+llm = OpenAILike(
+    model="qwen-max-latest",
+    **model_args
+)
+
+
+async def search_web(ctx: Context, query: str) -> str:
+    """
+    This tool searches the internet and returns the search results.
+    :param query: user's original request
+    :return: Then return the search results.
+    """
+    tavily_client = AsyncTavilyClient()
+    search_result = await tavily_client.search(str(query))
+    return str(search_result)
+
+
+async def record_notes(ctx: Context, notes: str, notes_title: str) -> str:
+    """
+    Useful for recording notes on a given topic. Your input should be notes with a title to save the notes under.
+    """
+    current_state = await ctx.get("state", {})
+    if "research_notes" not in current_state:
+        current_state["research_notes"] = {}
+    current_state["research_notes"][notes_title] = notes
+    await ctx.set("state", current_state)
+    return "notes recorded"
+
+search_agent = ReorderedFunctionAgent(
+    name="SearchAgent",
+    description="You are a helpful search assistant.",
+    system_prompt="""
+    You're a helpful search assistant.
+    First, you'll look up notes online related to the given topic and recorde these notes on the topic.
+    Once the notes are recorded, you should hand over control to the ResearchAgent.
+    """,
+    tools=[search_web, record_notes],
+    llm=llm,
+    can_handoff_to=["ResearchAgent"]
+)
+
+research_agent = ReorderedFunctionAgent(
+    name="ResearchAgent",
+    description="You are a helpful research assistant.",
+    system_prompt="""
+    You're a helpful report-writing assistant.
+    The system has already searched online and got enough search notes related to the user's topic.
+    You'll review these notes and draft a professional research report.
+    """,
+    llm=llm
+)
+
+workflow = AgentWorkflow(
+    agents=[search_agent, research_agent],
+    root_agent=search_agent.name,
+    handoff_output_prompt=(
+        "handoff_result: Due to {reason}, the user's request has been passed to {to_agent}."
+        "Please review the conversation history immediately and continue responding to the user's request."
+    ),
+)
+
+
+async def main():
+    handler = workflow.run(user_msg="What is LLamaIndex AgentWorkflow, and what problems does it solve?")
+    async for event in handler.stream_events():
+        if isinstance(event, AgentInput):
+            pprint(event.input)
+        elif isinstance(event, AgentOutput):
+            print(event.response)
+
+
+if __name__ == "__main__":
+    asyncio.run(main())

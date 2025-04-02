@@ -1,6 +1,8 @@
 from pprint import pprint
 import asyncio
 
+from rich.console import Console
+from rich.markdown import Markdown
 from dotenv import load_dotenv
 from tavily import AsyncTavilyClient
 from llama_index.llms.openai_like import OpenAILike
@@ -11,6 +13,8 @@ from contextual_agent_workflow import ContextualAgentWorkflow
 from contextual_function_agent import ContextualFunctionAgent
 
 load_dotenv("../.env")
+
+console = Console()
 
 model_args = {
     "is_chat_model": True,
@@ -40,11 +44,6 @@ async def record_notes(ctx: Context, notes: str, notes_title: str) -> str:
     """
     Useful for recording notes on a given topic. Your input should be notes with a title to save the notes under.
     """
-    # current_state = await ctx.get("state", {})
-    # if "research_notes" not in current_state:
-    #     current_state["research_notes"] = {}
-    # current_state["research_notes"][notes_title] = notes
-    # await ctx.set("state", current_state)
     return f"{notes_title} : {notes}"
 
 search_agent = ContextualFunctionAgent(
@@ -80,11 +79,13 @@ workflow = ContextualAgentWorkflow(
 async def main():
     handler = workflow.run(user_msg="What is LLamaIndex AgentWorkflow, and what problems does it solve?")
     async for event in handler.stream_events():
-        if isinstance(event, AgentInput):
-            pprint(event.input)
-        elif isinstance(event, AgentOutput):
+        if isinstance(event, AgentOutput):
+            print("=" * 70)
             print(f"🤖 {event.current_agent_name}")
-            print(event.response)
+            if event.response.content:
+                console.print(Markdown(event.response.content or ""))
+            else:
+                console.print(event.tool_calls)
 
 
 if __name__ == "__main__":

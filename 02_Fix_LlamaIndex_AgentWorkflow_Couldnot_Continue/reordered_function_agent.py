@@ -21,7 +21,7 @@ class ReorderedFunctionAgent(FunctionAgent):
     ) -> AgentOutput:
         last_msg = llm_input[-1] and llm_input[-1].content
         state = await ctx.get("state", None)
-        print(f">>>>>>>>>>>{state}")
+
         if "handoff_result" in last_msg:
             for message in llm_input[::-1]:
                 if message.role == MessageRole.USER:

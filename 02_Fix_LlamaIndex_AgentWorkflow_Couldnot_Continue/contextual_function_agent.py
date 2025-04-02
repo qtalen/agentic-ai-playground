@@ -61,7 +61,6 @@ class ContextualFunctionAgent(FunctionAgent):
     async def handle_tool_call_results(
         self, ctx: Context, results: List[ToolCallResult], memory: BaseMemory
     ) -> None:
-        print("<<<<<<<<<<<<<<<<<handle_tool_call_results >>>")
         current_state = await ctx.get("state", {})
 
         for tool_call_result in results:
@@ -80,21 +79,3 @@ class ContextualFunctionAgent(FunctionAgent):
                 break
             current_state[tool_call_result.tool_name] = str(tool_call_result.tool_output.content)
             await ctx.set("state", current_state)
-
-    # @override
-    # async def finalize(
-    #         self, ctx: Context, output: AgentOutput, memory: BaseMemory
-    # ) -> AgentOutput:
-    #     print("<<<<<<<<<<<<<<<<<<<<<<<<<<<<finalize")
-    #     scratchpad: List[ChatMessage] = await ctx.get(self.scratchpad_key, default=[])
-    #     current_state = await ctx.get("state", {})
-    #
-    #     for msg in scratchpad:
-    #         if msg.role == "assistant":
-    #             await memory.aput(msg)
-    #         elif msg.role == "tool":
-    #             tool_name = msg.additional_kwargs['tool_name']
-    #             current_state[tool_name] = msg.content
-    #     await ctx.set("state", current_state)
-    #     await ctx.set(self.scratchpad_key, [])
-    #     return output

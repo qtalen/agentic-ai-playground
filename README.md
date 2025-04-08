@@ -27,6 +27,7 @@ chainlit run deepseek_client.py
 
 Here are the article links corresponding to each code directory:
 * [01_Integrating_LlamaIndex_and_DeepSeek-R1](https://dataleadsfuture.com/integrating-llamaindex-and-deepseek-r1-for-reasoning_content-and-function-call-features-2)
+* [02_Fix_LlamaIndex_AgentWorkflow_Couldnot_Continue](https://www.dataleadsfuture.com/fixing-the-agent-handoff-problem-in-llamaindexs-agentworkflow-system/)
 
 --------------------------------------------
 

@@ -48,12 +48,6 @@ async def record_notes(ctx: Context, notes: str, notes_title: str) -> str:
 search_agent = FunctionAgent(
     name="SearchAgent",
     description="You are a helpful search assistant.",
-    # system_prompt="""
-    # You're a search assistant.
-    # You don't generate any response.
-    # You only search the internet for information related to the user's request.
-    # After getting the search results, you directly hand off control to the ResearchAgent.
-    # """,
     system_prompt="""
     You're a helpful search assistant.
     First, you'll look up notes online related to the given topic and recorde these notes on the topic.

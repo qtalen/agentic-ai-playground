@@ -23,7 +23,6 @@ Current state：
 
 class ContextualFunctionAgent(FunctionAgent):
     """The Function Agent contains a system_prompt with state strings."""
-
     state_str_prompt: Optional[str] = Field(
         default=STATE_STR_PROMPT,
         description="Adding state information to the system_prompt."
@@ -78,4 +77,4 @@ class ContextualFunctionAgent(FunctionAgent):
                 )
                 break
             current_state[tool_call_result.tool_name] = str(tool_call_result.tool_output.content)
-            await ctx.set("state", current_state)
+        await ctx.set("state", current_state)

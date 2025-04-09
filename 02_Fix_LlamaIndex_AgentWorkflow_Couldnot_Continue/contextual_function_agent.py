@@ -76,5 +76,8 @@ class ContextualFunctionAgent(FunctionAgent):
                     )
                 )
                 break
-            current_state[tool_call_result.tool_name] = str(tool_call_result.tool_output.content)
+            current_state[tool_call_result.tool_name] = {
+                'params': str(tool_call_result.tool_kwargs),
+                'output': str(tool_call_result.tool_output.content)
+            }
         await ctx.set("state", current_state)

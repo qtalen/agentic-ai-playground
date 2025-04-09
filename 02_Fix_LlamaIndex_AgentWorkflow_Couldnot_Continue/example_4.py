@@ -77,7 +77,7 @@ workflow = ContextualAgentWorkflow(
 
 context = Context(workflow=workflow)
 
-2
+
 async def main():
     handler = workflow.run(user_msg="What is LLamaIndex AgentWorkflow, and what problems does it solve?", context=context)
     async for event in handler.stream_events():

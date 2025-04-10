@@ -52,7 +52,7 @@ search_agent = ContextualFunctionAgent(
     system_prompt="""
     You're a helpful search assistant.
     First, you'll look up notes online related to the given topic and recorde these notes on the topic.
-    Once the notes are recorded, you should hand over control to the ResearchAgent.
+    If you've already finished recording the notes, you should hand over control to the ResearchAgent.
     """,
     tools=[search_web, record_notes],
     llm=llm,

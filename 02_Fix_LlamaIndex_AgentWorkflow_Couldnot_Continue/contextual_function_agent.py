@@ -15,9 +15,11 @@ from llama_index.core.agent.workflow import (
 )
 
 STATE_STR_PROMPT = """
-
 Current state：
 {state_str}
+
+User request:
+{user_request}
 """
 
 
@@ -41,6 +43,7 @@ class ContextualFunctionAgent(FunctionAgent):
         current_state = await ctx.get("state")
 
         state_str_template = PromptTemplate(self.state_str_prompt)
+
         state_prompt = state_str_template.format(
             state_str=current_state
         )
@@ -49,7 +52,7 @@ class ContextualFunctionAgent(FunctionAgent):
             llm_input[0].content = llm_input[0].content + state_prompt
         else:
             llm_input = [ChatMessage(role="system", content=state_prompt)] + llm_input
-
+        pprint(llm_input)
         output = await super().take_step(
             ctx, llm_input, tools, memory
         )

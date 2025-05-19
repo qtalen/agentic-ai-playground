@@ -1,3 +1,4 @@
+import os
 import asyncio
 
 from dotenv import load_dotenv
@@ -10,7 +11,16 @@ from utils.openai_like import OpenAILikeChatCompletionClient
 load_dotenv("../.env")
 
 original_model_client = OpenAIChatCompletionClient(
-    model="qwen-plus-latest"
+    model="qwen-plus-latest",
+    base_url=os.getenv("OPENAI_API_BASE"),
+    model_info={
+        "vision": False,
+        "function_calling": True,
+        "json_output": True,
+        "family": 'qwen',
+        "structured_output": True,
+        "multiple_system_messages": False,
+    }
 )
 
 model_client = OpenAILikeChatCompletionClient(
@@ -19,8 +29,8 @@ model_client = OpenAILikeChatCompletionClient(
 
 agent = AssistantAgent(
     name="assistant",
-    # model_client=original_model_client,
-    model_client=model_client,
+    model_client=original_model_client,
+    # model_client=model_client,
     system_message="You are a helpful assistant."
 )
 

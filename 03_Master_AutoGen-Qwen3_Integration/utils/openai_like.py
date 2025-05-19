@@ -89,6 +89,15 @@ _MODEL_INFO: dict[str, dict] = {
         "context_window": 128_000,
         "multiple_system_messages": False,
     },
+    "qwen3-30b-a3b": {
+        "vision": False,
+        "function_calling": True,
+        "json_output": True,
+        "family": ModelFamily.QWEN,
+        "structured_output": True,
+        "context_window": 128_000,
+        "multiple_system_messages": False,
+    },
     "deepseek-chat": {
         "vision": False,
         "function_calling": True,

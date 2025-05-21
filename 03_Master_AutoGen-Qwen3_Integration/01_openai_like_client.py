@@ -12,7 +12,7 @@ load_dotenv("../.env")
 
 original_model_client = OpenAIChatCompletionClient(
     model="qwen-plus-latest",
-    base_url=os.getenv("OPENAI_API_BASE"),
+    base_url=os.getenv("OPENAI_BASE_URL"),
     model_info={
         "vision": False,
         "function_calling": True,
@@ -29,8 +29,8 @@ model_client = OpenAILikeChatCompletionClient(
 
 agent = AssistantAgent(
     name="assistant",
-    model_client=original_model_client,
-    # model_client=model_client,
+    # model_client=original_model_client,
+    model_client=model_client,
     system_message="You are a helpful assistant."
 )
 

@@ -32,4 +32,4 @@ Here are the article links corresponding to each code directory:
 
 --------------------------------------------
 
-Feel free to [subscribe](https://www.dataleadsfuture.com/deep-diving-into-llamaindex-workflow-event-driven-llm-architecture/#/portal/signup) to my blog. Your support means the world to me🎉!
+Feel free to [subscribe](https://www.dataleadsfuture.com/#/portal/signup) to my blog. Your support means the world to me🎉!

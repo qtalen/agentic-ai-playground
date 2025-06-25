@@ -1,5 +1,6 @@
 python-dotenv
 tavily-python
+openai
 llama-index-llms-openai-like
 llama-index
 chainlit

@@ -9,10 +9,11 @@ load_dotenv("../.env")
 
 mlflow.set_tracking_uri("http://localhost:5000")
 mlflow.set_experiment("test_openai_tracing")
-mlflow.openai.autolog()
 
 async_client = openai.AsyncOpenAI()
 
+
+@mlflow.trace
 async def main(user_query: str) -> str:
     messages = [
         {"role": "system", "content": "You are a helpful assistant."},

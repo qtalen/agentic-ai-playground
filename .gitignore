@@ -172,3 +172,7 @@ pkl_objects
 .chainlit/
 chainlit.md
 .files/
+
+# mlflow files
+mlruns/
+mlartifacts/

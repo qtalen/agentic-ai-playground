@@ -9,3 +9,5 @@ autogen-ext[openai]
 autogen-core
 autogen-agentchat
 mcp-server-fetch
+mlflow>=3.1
+

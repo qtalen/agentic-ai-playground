@@ -7,7 +7,6 @@ import mlflow
 
 load_dotenv("../.env")
 
-mlflow.set_tracking_uri("http://localhost:5000")
 mlflow.set_experiment("test_openai_tracing")
 
 async_client = openai.AsyncOpenAI()

@@ -6,7 +6,7 @@ from pydantic import BaseModel
 from autogen_agentchat.agents import AssistantAgent
 from autogen_agentchat.ui import Console
 
-from utils.openai_like import OpenAILikeChatCompletionClient
+from utils.autogen_openai_like import OpenAILikeChatCompletionClient
 
 load_dotenv("../.env")
 

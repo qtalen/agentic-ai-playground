@@ -6,7 +6,6 @@ import mlflow
 from mlflow.entities import SpanType
 
 load_dotenv("../.env")
-mlflow.set_tracking_uri("http://localhost:5000")
 mlflow.set_experiment("test_openai_tracing")
 mlflow.openai.autolog()
 

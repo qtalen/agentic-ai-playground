@@ -121,7 +121,7 @@ async def search_agent(query: str) -> str:
             "num_of_tool_call_results": len(tool_call_results),
         })
 
-    with mlflow.start_span(name="reflect_tool_calls", span_type=SpanType.AGENT) as span:
+    with mlflow.start_span(name="reflect_tool_calls", span_type=SpanType.LLM) as span:
         span.set_inputs({
             "messages": messages,
         })

@@ -40,8 +40,10 @@ agent = AssistantAgent(
 
 # @mlflow.trace(span_type=SpanType.AGENT)
 async def main():
+    print(">>>>>>Start running Autogen Assistant Tracing<<<<<<")
     result = await agent.run(task="Get the latest news of Agentic AI.")
-    print(result)
+    print(str(result)[0:60] + "...")
+    print(""">>>>>>Autogen AssistantAgent Tracing executed successfully<<<<<<""")
 
 if __name__ == "__main__":
     asyncio.run(main())

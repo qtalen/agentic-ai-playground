@@ -16,7 +16,7 @@ def truncate_str(text: str, max_length: int = 45) -> str:
     return text if max_length <= 3 else f"{text[:max_length]}..."
 
 
-@mlflow.trace(span_type=SpanType.AGENT)
+@mlflow.trace(span_type=SpanType.CHAT_MODEL)
 async def chatbot(user_query: str, messages: list[dict[str, str]]) -> str:
     messages.append({
         "role": "user",

@@ -20,7 +20,7 @@ async def main(user_query: str) -> str:
     ]
 
     response = await async_client.chat.completions.create(
-        model="qwen-plus-latest",
+        model="qwen-pluss-latest",
         temperature=0.7,
         messages=messages,
     )

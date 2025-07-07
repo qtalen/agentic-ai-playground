@@ -1,5 +1,5 @@
 import os
-from typing import Sequence, override, Optional, Mapping, Any, AsyncGenerator, Union, Set
+from typing import Sequence, override, Optional, Mapping, Any, AsyncGenerator, Union, Literal
 import copy
 from textwrap import dedent
 
@@ -11,9 +11,11 @@ from autogen_core.models._types import CreateResult, SystemMessage
 from autogen_ext.models.openai import OpenAIChatCompletionClient
 from autogen_ext.models.openai._openai_client import CreateParams
 
+
 class ModelFamily:
     QWEN = "qwen"
     DEEPSEEK = "deepseek"
+
 
 DEFAULT_MODEL_INFO = {
     "vision": False,
@@ -22,7 +24,7 @@ DEFAULT_MODEL_INFO = {
     "family": ModelFamily.QWEN,
     "structured_output": True,
     "context_window": 32_000,
-    "multiple_system_messages": False,
+    "multiple_system_messages": True,
 }
 
 _MODEL_INFO: dict[str, dict] = {
@@ -33,16 +35,16 @@ _MODEL_INFO: dict[str, dict] = {
         "family": ModelFamily.QWEN,
         "structured_output": True,
         "context_window": 32_000,
-        "multiple_system_messages": False,
+        "multiple_system_messages": True,
     },
-    "qwen-max-latest" : {
+    "qwen-max-latest": {
         "vision": False,
         "function_calling": True,
         "json_output": True,
         "family": ModelFamily.QWEN,
         "structured_output": True,
         "context_window": 128_000,
-        "multiple_system_messages": False,
+        "multiple_system_messages": True,
     },
     "qwen-plus": {
         "vision": False,
@@ -51,7 +53,7 @@ _MODEL_INFO: dict[str, dict] = {
         "family": ModelFamily.QWEN,
         "structured_output": True,
         "context_window": 128_000,
-        "multiple_system_messages": False,
+        "multiple_system_messages": True,
     },
     "qwen-plus-latest": {
         "vision": False,
@@ -60,7 +62,7 @@ _MODEL_INFO: dict[str, dict] = {
         "family": ModelFamily.QWEN,
         "structured_output": True,
         "context_window": 128_000,
-        "multiple_system_messages": False,
+        "multiple_system_messages": True,
     },
     "qwen-turbo": {
         "vision": False,
@@ -69,7 +71,7 @@ _MODEL_INFO: dict[str, dict] = {
         "family": ModelFamily.QWEN,
         "structured_output": True,
         "context_window": 1_000_000,
-        "multiple_system_messages": False,
+        "multiple_system_messages": True,
     },
     "qwen-turbo-latest": {
         "vision": False,
@@ -78,7 +80,25 @@ _MODEL_INFO: dict[str, dict] = {
         "family": ModelFamily.QWEN,
         "structured_output": True,
         "context_window": 1_000_000,
-        "multiple_system_messages": False,
+        "multiple_system_messages": True,
+    },
+    "qwen-omni-turbo": {
+        "vision": True,
+        "function_calling": True,
+        "json_output": True,
+        "family": "o1",
+        "structured_output": True,
+        "context_window": 1_000_000,
+        "multiple_system_messages": True,
+    },
+    "qwen-omni-turbo-latest": {
+        "vision": True,
+        "function_calling": True,
+        "json_output": True,
+        "family": "o1",
+        "structured_output": True,
+        "context_window": 1_000_000,
+        "multiple_system_messages": True,
     },
     "qwen3-235b-a22b": {
         "vision": False,
@@ -87,16 +107,7 @@ _MODEL_INFO: dict[str, dict] = {
         "family": ModelFamily.QWEN,
         "structured_output": True,
         "context_window": 128_000,
-        "multiple_system_messages": False,
-    },
-    "qwen3-30b-a3b": {
-        "vision": False,
-        "function_calling": True,
-        "json_output": True,
-        "family": ModelFamily.QWEN,
-        "structured_output": True,
-        "context_window": 128_000,
-        "multiple_system_messages": False,
+        "multiple_system_messages": True,
     },
     "deepseek-chat": {
         "vision": False,
@@ -105,20 +116,21 @@ _MODEL_INFO: dict[str, dict] = {
         "family": ModelFamily.DEEPSEEK,
         "structured_output": True,
         "context_window": 64_000,
-        "multiple_system_messages": False,
+        "multiple_system_messages": True,
     },
     "deepseek-reasoner": {
         "vision": False,
-        "function_calling": False,
-        "json_output": False,
+        "function_calling": True,
+        "json_output": True,
         "family": ModelFamily.DEEPSEEK,
         "structured_output": True,
         "context_window": 64_000,
-        "multiple_system_messages": False,
+        "multiple_system_messages": True,
     }
 }
 
 extra_kwargs: set = {"extra_body"}
+
 
 class OpenAILikeChatCompletionClient(OpenAIChatCompletionClient):
     def __init__(self, **kwargs):
@@ -129,7 +141,7 @@ class OpenAILikeChatCompletionClient(OpenAIChatCompletionClient):
             kwargs["base_url"] = os.getenv("OPENAI_BASE_URL") or os.getenv("OPENAI_API_BASE")
 
         super().__init__(**kwargs)
-        for key in extra_kwargs: # Add the model-specific extension parameters for Qwen3 in self._create_args
+        for key in extra_kwargs:  # Add the model-specific extension parameters for Qwen3 in self._create_args
             if key in kwargs:
                 self._create_args[key] = kwargs[key]
 
@@ -144,6 +156,7 @@ class OpenAILikeChatCompletionClient(OpenAIChatCompletionClient):
             messages: Sequence[LLMMessage],
             *,
             tools: Sequence[Tool | ToolSchema] = [],
+            tool_choice: Tool | Literal["auto", "required", "none"] = "auto",
             json_output: Optional[bool | type[BaseModel]] = None,
             extra_create_args: Mapping[str, Any] = {},
             cancellation_token: Optional[CancellationToken] = None,
@@ -154,6 +167,7 @@ class OpenAILikeChatCompletionClient(OpenAIChatCompletionClient):
         result = await super().create(
             messages=messages,
             tools=tools,
+            tool_choice=tool_choice,
             json_output=json_output,
             extra_create_args=extra_create_args,
             cancellation_token=cancellation_token
@@ -166,21 +180,25 @@ class OpenAILikeChatCompletionClient(OpenAIChatCompletionClient):
             messages: Sequence[LLMMessage],
             *,
             tools: Sequence[Tool | ToolSchema] = [],
+            tool_choice: Tool | Literal["auto", "required", "none"] = "auto",
             json_output: Optional[bool | type[BaseModel]] = None,
             extra_create_args: Mapping[str, Any] = {},
             cancellation_token: Optional[CancellationToken] = None,
             max_consecutive_empty_chunk_tolerance: int = 0,
+            include_usage: Optional[bool] = None,
     ) -> AsyncGenerator[Union[str, CreateResult], None]:
         if json_output is not None and issubclass(json_output, BaseModel):
             messages = self._append_json_schema(messages, json_output)
             json_output = None
         async for result in super().create_stream(
-            messages=messages,
-            tools=tools,
-            json_output=json_output,
-            extra_create_args=extra_create_args,
-            cancellation_token=cancellation_token,
-            max_consecutive_empty_chunk_tolerance=max_consecutive_empty_chunk_tolerance
+                messages=messages,
+                tools=tools,
+                tool_choice=tool_choice,
+                json_output=json_output,
+                extra_create_args=extra_create_args,
+                cancellation_token=cancellation_token,
+                max_consecutive_empty_chunk_tolerance=max_consecutive_empty_chunk_tolerance,
+                include_usage=include_usage,
         ):
             yield result
 
@@ -190,28 +208,12 @@ class OpenAILikeChatCompletionClient(OpenAIChatCompletionClient):
         first_message = messages[0]
         if isinstance(first_message, SystemMessage):
             first_message.content += dedent(f"""\
-            
+
             <output-format>
             Your output must adhere to the following JSON schema format, 
-            without any Markdown syntax, and without any preface or explanation:
-            
+            without any Markdown syntax, and without any preface or explanation.:
+
             {json_output.model_json_schema()}
             </output-format>
             """)
         return messages
-
-    def _process_create_args(
-            self,
-            messages: Sequence[LLMMessage],
-            tools: Sequence[Tool | ToolSchema],
-            json_output: Optional[bool | type[BaseModel]],
-            extra_create_args: Mapping[str, Any],
-    ) -> CreateParams:
-        # print(self._create_args)
-        params = super()._process_create_args(
-            messages=messages,
-            tools=tools,
-            json_output=json_output,
-            extra_create_args=extra_create_args
-        )
-        return params

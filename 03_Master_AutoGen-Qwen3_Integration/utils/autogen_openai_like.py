@@ -199,19 +199,3 @@ class OpenAILikeChatCompletionClient(OpenAIChatCompletionClient):
             </output-format>
             """)
         return messages
-
-    def _process_create_args(
-            self,
-            messages: Sequence[LLMMessage],
-            tools: Sequence[Tool | ToolSchema],
-            json_output: Optional[bool | type[BaseModel]],
-            extra_create_args: Mapping[str, Any],
-    ) -> CreateParams:
-        # print(self._create_args)
-        params = super()._process_create_args(
-            messages=messages,
-            tools=tools,
-            json_output=json_output,
-            extra_create_args=extra_create_args
-        )
-        return params

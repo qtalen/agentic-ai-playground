@@ -11,4 +11,4 @@ autogen-core>=0.6.2
 autogen-agentchat>=0.6.2
 mcp-server-fetch
 mlflow>=3.1
-
+chainlit

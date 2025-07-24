@@ -34,7 +34,7 @@ class ImageGeneration(Workflow):
         )
         self.openai_client = AsyncOpenAI(
             api_key=os.getenv("REAL_OPENAI_API_KEY"),
-            base_url=os.getenv("REAL_OPENAI_BASE_URL"),
+            base_url=os.getenv("REAL_OPENAI_API_BASE"),
         )
 
         super().__init__(*args, **kwargs)

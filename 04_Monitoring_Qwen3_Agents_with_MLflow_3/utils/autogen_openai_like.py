@@ -13,8 +13,9 @@ from autogen_ext.models.openai._openai_client import CreateParams
 
 
 class ModelFamily:
-    QWEN = "qwen"
-    DEEPSEEK = "deepseek"
+    QWEN = "gpt-45"
+    DEEPSEEK = "gpt-45"
+    R1 = "r1"
 
 
 DEFAULT_MODEL_INFO = {
@@ -100,11 +101,11 @@ _MODEL_INFO: dict[str, dict] = {
         "context_window": 1_000_000,
         "multiple_system_messages": True,
     },
-    "qwen3-235b-a22b": {
+    "qwen3-235b-a22b-thinking-2507": {
         "vision": False,
         "function_calling": True,
         "json_output": True,
-        "family": ModelFamily.QWEN,
+        "family": ModelFamily.R1,
         "structured_output": True,
         "context_window": 128_000,
         "multiple_system_messages": True,

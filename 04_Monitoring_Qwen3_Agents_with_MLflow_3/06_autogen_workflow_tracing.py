@@ -11,10 +11,11 @@ from autogen_agentchat.ui import Console
 import mlflow
 
 from utils.autogen_openai_like import OpenAILikeChatCompletionClient
-import utils.autogen_patching
+# import utils.autogen_patching
 
 
 load_dotenv("../.env")
+mlflow.autogen.autolog()
 mlflow.set_experiment("test_autogen_tracing")
 
 model_client_config = {
@@ -71,6 +72,7 @@ graph = builder.build()
 flow = GraphFlow(
     participants=builder.get_participants(),
     graph=graph,
+    max_turns=30
 )
 
 async def main():

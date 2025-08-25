@@ -19,9 +19,8 @@ mlflow.autogen.autolog()
 mlflow.set_experiment("test_autogen_tracing")
 
 model_client_config = {
-    "model": "qwen3-235b-a22b",
-    "temperature": 0.5,
-    "extra_body": {"enable_thinking": False}
+    "model": "qwen3-30b-a3b-instruct-2507",
+    "temperature": 0.5
 }
 
 model_client = OpenAILikeChatCompletionClient(**model_client_config)

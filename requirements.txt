@@ -7,6 +7,7 @@ chainlit
 rich
 pydantic
 autogen-ext[openai]>=0.6.2
+autogen-ext[docker]
 autogen-core>=0.6.2
 autogen-agentchat>=0.6.2
 mcp-server-fetch

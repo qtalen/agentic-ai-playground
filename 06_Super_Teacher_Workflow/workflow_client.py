@@ -87,7 +87,7 @@ if __name__ == "__main__":
     from autogen_agentchat.ui import Console
 
     async def main():
-        task = "The bag has 4 black balls and 1 white ball. Every time, you pick one ball at random and swap it for a black ball. Keep going, and figure out the chance of pulling a black ball on the third try."
+        task = "One day, Xuanxuan went to her cousin's house, which is 4,000 meters from her home. At 7:20 in the morning, Xuanxuan started walking from her house at a speed of 60 meters per minute. At the same time, her cousin started riding his bike to pick her up. When the cousin reached Xuanxuan's house, he found she had already left, so he turned around and rode after her at 260 meters per minute. Once he caught up with her, he carried her back to his house on the bike at a speed of 175 meters per minute. How many minutes were left until 8:00 when they arrived at the cousin's house?"
 
         async with docker_executor:
             await Console(SuperTeacherFlow().run_stream(task=task))

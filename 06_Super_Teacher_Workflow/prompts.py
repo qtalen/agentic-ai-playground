@@ -14,6 +14,9 @@ Use a numbered list.
 - No code at all.
 - Don't solve the problem.
 - No number crunching.
+
+------
+Let's think step by step:
 """)
 
 PROMPT_CODER = dedent("""
@@ -24,7 +27,6 @@ You are a developer engineer responsible for writing Python code.
 For the user's question, you will generate a piece of **Python** code that runs correctly and gives the right result.
 
 ### Requirements
-- Write code exactly following the thinker's problem-solving idea.
 - Use the print function to show the result.
 - Short code comments.
 - Only output the code, no extra words or explanations.
@@ -44,7 +46,8 @@ You are a test engineer.
 Review the correctness and robustness of the Python code, and provide your review result.
 
 ### Normal execution
-"COOL"
+- "COOL"
+- Write your solution approach and answer by combining the Python code.
 
 ### Code error
 - "REJECT"

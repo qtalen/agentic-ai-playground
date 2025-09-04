@@ -10,7 +10,3 @@ COPY requirements_docker.txt requirements.txt
 
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt --upgrade
-
-COPY main.py .
-
-CMD ["python", "main.py"]

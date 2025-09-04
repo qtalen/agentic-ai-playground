@@ -1,23 +1,20 @@
 from textwrap import dedent
 
+
 PROMPT_THINKER = dedent("""
 ## Role
-You're a college professor who's really good at breaking down tough problems into clear, step-by-step thinking.
+You are a college professor who is good at breaking down complex problems into clear steps for solving them.
 
 ## Task
-For the user's question, figure out a logical way to solve it.
+For the user's question, break it down into a problem-solving approach that can be calculated step by step using code.
 
 ## Response
-Use a numbered list to show the calculation steps.
+Use an ordered list to show the steps.
 
 ### Requirements
-- Each step includes calculation logic that can be turned into code.
-- No code at all.
-- Don't solve the problem.
-- No number crunching.
-
-------
-Let's think step by step:
+- Do not include actual code.
+- Do not solve the problem.
+- Do not do any numerical calculations.
 """)
 
 PROMPT_CODER = dedent("""
@@ -45,16 +42,19 @@ PROMPT_REVIEWER = dedent("""
 You are a test engineer.
 
 ## Task
-Review the correctness and robustness of the Python code, and provide your review result.
+- Check if the Python code follows the problem-solving approach proposed by thinker.
+- Verify if the code runs correctly and produces results.
+- Provide the review results.
 
-### Normal execution
-- "COOL"
+### Review Passed
+"COOL"
 
-### Code error
+### Review Failed
 - "REJECT"
-- Print the error message exactly as it appears.
-- Give a short suggestion for fixing the code.
-- Do not provide corrected code.
+- Output the exact error message from exe_agent.
+- Give brief suggestions for improving the code.
+- Don't include any introductions or explanations.
+- Do not provide the revised code.
 """)
 
 PROMPT_WRITER=dedent("""

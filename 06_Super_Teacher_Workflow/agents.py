@@ -20,11 +20,12 @@ load_dotenv("../.env")
 
 slm_client = OpenAILikeChatCompletionClient(
     model="qwen3-30b-a3b-instruct-2507",
+    # model="qwen-plus-latest",
     temperature=0.7
 )
 
 coder_client = OpenAILikeChatCompletionClient(
-    model="qwen3-coder-plus-2025-07-22",
+    model="qwen3-coder-plus",
     temperature=0.01
 )
 
@@ -62,6 +63,7 @@ filtered_reviewer = MessageFilterAgent(
     filter=MessageFilterConfig(
         per_source=[
             PerSourceFilter(source="user", position="first", count=1),
+            PerSourceFilter(source="thinker", position="first", count=1),
             PerSourceFilter(source="coder", position="last", count=1),
             PerSourceFilter(source="exe_agent", position="last", count=1),
         ]

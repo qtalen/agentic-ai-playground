@@ -91,18 +91,18 @@ if __name__ == "__main__":
     mlflow.set_experiment("Super Teacher Workflow")
     mlflow.autogen.autolog()
     async def main():
-        # task = "One day, Julia went to her cousin's house, which is 4,000 meters from her home. At 7:20 in the morning, Julia started walking from her house at a speed of 60 meters per minute. At the same time, her cousin started riding his bike to pick her up. When the cousin reached Julia's house, he found she had already left, so he turned around and rode after her at 260 meters per minute. Once he caught up with her, he carried her back to his house on the bike at a speed of 175 meters per minute. How many minutes were left until 8:00 when they arrived at the cousin's house?"
+        task = "One day, Julia went to her cousin's house, which is 4,000 meters from her home. At 7:20 in the morning, Julia started walking from her house at a speed of 60 meters per minute. At the same time, her cousin started riding his bike to pick her up. When the cousin reached Julia's house, he found she had already left, so he turned around and rode after her at 260 meters per minute. Once he caught up with her, he carried her back to his house on the bike at a speed of 175 meters per minute. How many minutes were left until 8:00 when they arrived at the cousin's house?"
         # task = """
         # A road construction team took on the task of building a highway.
         # The original plan was to build 720 meters per day, but in reality, they built 80 meters more each day.
         # This way, they were able to finish 1200 meters short of the full length 3 days ahead of schedule. How long is the entire highway?
         # """
-        task = """
-        The school organized two extracurricular interest groups to go on an outing.
-        The first group walks 4.5 kilometers per hour, and the second group goes 3.5 kilometers per hour.
-        After both groups set off at the same time for 1 hour, the first group stopped to visit an orchard for 1 hour before going to catch up with the second group.
-        How long will it take for the first group to catch up with the second group?
-        """
+        # task = """
+        # The school organized two extracurricular interest groups to go on an outing.
+        # The first group walks 4.5 kilometers per hour, and the second group goes 3.5 kilometers per hour.
+        # After both groups set off at the same time for 1 hour, the first group stopped to visit an orchard for 1 hour before going to catch up with the second group.
+        # How long will it take for the first group to catch up with the second group?
+        # """
         with mlflow.start_span(name="root_span"):
             async with docker_executor:
                 await Console(SuperTeacherFlow().run_stream(task=task))

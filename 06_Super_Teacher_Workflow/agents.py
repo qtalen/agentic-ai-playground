@@ -20,7 +20,6 @@ load_dotenv("../.env")
 
 slm_client = OpenAILikeChatCompletionClient(
     model="qwen3-30b-a3b-instruct-2507",
-    # model="qwen-plus-latest",
     temperature=0.7
 )
 

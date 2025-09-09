@@ -31,6 +31,7 @@ Here are the article links corresponding to each code directory:
 * [03_Master_AutoGen-Qwen3_Integration](https://www.dataleadsfuture.com/build-autogen-agents-with-qwen3-structured-output-thinking-mode/)
 * [04_Monitoring_Qwen3_Agents_with_MLflow_3](https://www.dataleadsfuture.com/monitoring-qwen-3-agents-with-mlflow-3-x-end-to-end-tracking-tutorial/)
 * [05_Image_Generation_Workflow](https://www.dataleadsfuture.com/use-llamaindex-workflow-to-create-an-ink-painting-style-image-generation-workflow/)
+* [06_Super_Teacher_Workflow](https://www.dataleadsfuture.com/i-used-autogen-graphflow-and-qwen3-coder-to-solve-math-problems-and-it-worked/)
 
 --------------------------------------------
 

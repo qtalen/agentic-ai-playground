@@ -9,4 +9,4 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 COPY requirements_docker.txt requirements.txt
 
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt.bak --upgrade
+    pip install --no-cache-dir -r requirements.txt --upgrade

@@ -4,7 +4,7 @@ To run this project, you should first install the dependencies:
 
 ```shell
 cd ..
-pip install -r requirements.txt --upgrade
+pip install -e .
 ```
 
 Next, create a `.env` file to store your LLM's API settings.
@@ -12,6 +12,7 @@ Next, create a `.env` file to store your LLM's API settings.
 This project uses a Docker-based Python runtime environment, so you'll also need to build an image named `python-docker-env`:
 
 ```shell
+cd 06_Super_Teacher_Workflow
 cd docker_executor
 docker build -t python-docker-env .
 ```

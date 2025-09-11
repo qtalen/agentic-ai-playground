@@ -6,7 +6,7 @@ from autogen_agentchat.agents import AssistantAgent
 import mlflow
 from mlflow.entities import SpanType
 
-from utils.autogen_openai_like import OpenAILikeChatCompletionClient
+from common.autogen.openai_like import OpenAILikeChatCompletionClient
 import utils.autogen_patching
 
 

@@ -4,7 +4,7 @@ To test this code, you'll need to install the dependencies first:
 
 ```shell
 cd ..
-pip install -r requirements.txt --upgrade
+pip install -e .
 ```
 
 --------------------------------

@@ -4,11 +4,10 @@ To test-run this code, you'll need to install the dependencies first:
 
 ```shell
 cd ..
-pip install -r requirements.txt --upgrade
+pip install -e .
 ```
 
 Description of the source files:
-* `/utils/autogen_openai_like.py`: My implementation of an OpenAI-Like client for Qwen and Deepseek models.
 * `/utils/autogen_patching.py`: Monkey patch for MLflow ChatMessage to fix Autogen autolog bugs.
 * `01_basic_setup.py`: Basic usage based on annotations.
 * `02_openai_autolog.py`: How to use OpenAI autolog.

@@ -8,7 +8,7 @@ from autogen_agentchat.agents import (
     PerSourceFilter
 )
 
-from utils.openai_like import OpenAILikeChatCompletionClient
+from common.autogen.openai_like import OpenAILikeChatCompletionClient
 from prompts import (
     PROMPT_THINKER,
     PROMPT_CODER,

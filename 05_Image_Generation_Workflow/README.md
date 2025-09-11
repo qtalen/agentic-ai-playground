@@ -4,7 +4,7 @@ To run this code, first install the dependencies:
 
 ```shell
 cd ..
-pip install -r requirements.txt --upgrade
+pip install -e .
 ```
 
 Next, create a `.env_deepseek` file to store the LLM API settings.

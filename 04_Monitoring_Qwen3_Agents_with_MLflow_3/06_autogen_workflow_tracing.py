@@ -10,7 +10,7 @@ from autogen_agentchat.teams import (
 from autogen_agentchat.ui import Console
 import mlflow
 
-from utils.autogen_openai_like import OpenAILikeChatCompletionClient
+from common.autogen.openai_like import OpenAILikeChatCompletionClient
 # import utils.autogen_patching
 
 

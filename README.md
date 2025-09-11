@@ -5,7 +5,7 @@ This repo contains the source code for my "Agentic AI" series. Feel free to read
 To get started:
 
 ```shell
-pip install -r requirements.txt
+pip install -e .
 ```
 
 Next, you'll need to create your own .env file:

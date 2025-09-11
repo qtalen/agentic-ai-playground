@@ -1,3 +1,4 @@
+-e .
 python-dotenv
 tavily-python
 openai

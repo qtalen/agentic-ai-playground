@@ -1,6 +1,6 @@
 [project]
 name = "agent-ai-playground"
-version = "0.6.0"
+version = "0.6.1"
 description = 'This repo contains the source code for my Agentic AI series.'
 readme = "README.md"
 requires-python = ">=3.12"
@@ -21,3 +21,7 @@ dependencies = [
     "mlflow>=3.1",
     "chainlit"
 ]
+
+[build-system]
+requires = ["setuptools>=65", "wheel"]
+build-backend = "setuptools.build_meta"

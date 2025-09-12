@@ -12,6 +12,7 @@ from llama_index.core.workflow import (
     step
 )
 
+from common.utils.project_path import get_project_root
 import ctx_manager as ctx_mgr
 from prompts_en import (
     PROMPT_GENERATE_SYSTEM, PROMPT_TRANSLATE_SYSTEM,
@@ -22,7 +23,7 @@ from events import (
     StreamEvent, GenImageEvent, RewriteQueryEvent
 )
 
-load_dotenv("../.env_deepseek")
+load_dotenv(get_project_root()/".env_deepseek")
 
 
 class ImageGeneration(Workflow):

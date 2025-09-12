@@ -9,6 +9,7 @@ from autogen_agentchat.agents import (
 )
 
 from common.autogen.openai_like import OpenAILikeChatCompletionClient
+from common.utils.project_path import get_project_root
 from prompts import (
     PROMPT_THINKER,
     PROMPT_CODER,
@@ -16,7 +17,7 @@ from prompts import (
     PROMPT_WRITER
 )
 
-load_dotenv("../.env")
+load_dotenv(get_project_root()/".env")
 
 slm_client = OpenAILikeChatCompletionClient(
     model="qwen3-30b-a3b-instruct-2507",

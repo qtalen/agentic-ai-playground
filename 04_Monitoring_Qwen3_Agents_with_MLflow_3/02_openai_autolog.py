@@ -5,7 +5,9 @@ import openai
 import mlflow
 from mlflow.entities import SpanType
 
-load_dotenv("../.env")
+from common.utils.project_path import get_project_root
+
+load_dotenv(get_project_root()/".env")
 mlflow.set_experiment("test_openai_tracing")
 mlflow.openai.autolog()
 

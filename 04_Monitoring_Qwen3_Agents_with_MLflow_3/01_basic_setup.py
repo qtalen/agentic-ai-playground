@@ -4,8 +4,9 @@ from dotenv import load_dotenv
 import openai
 import mlflow
 
+from common.utils.project_path import get_project_root
 
-load_dotenv("../.env")
+load_dotenv(get_project_root()/".env")
 
 mlflow.set_experiment("test_openai_tracing")
 
@@ -20,7 +21,7 @@ async def main(user_query: str) -> str:
     ]
 
     response = await async_client.chat.completions.create(
-        model="qwen-pluss-latest",
+        model="qwen-plus-latest",
         temperature=0.7,
         messages=messages,
     )

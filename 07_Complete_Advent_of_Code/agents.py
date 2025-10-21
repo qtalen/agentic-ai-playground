@@ -12,8 +12,6 @@ from autogen_agentchat.messages import BaseChatMessage, BaseAgentEvent, TextMess
 from autogen_agentchat.ui import Console
 from autogen_ext.tools.code_execution import PythonCodeExecutionTool
 from autogen_ext.code_executors.docker_jupyter import DockerJupyterCodeExecutor, DockerJupyterServer
-from autogen_ext.code_executors.docker_jupyter._jupyter_server import JupyterConnectionInfo
-from autogen_ext.code_executors.jupyter import JupyterCodeExecutor
 
 from common.autogen.openai_like import OpenAILikeChatCompletionClient
 from common.utils.project_path import get_project_root, get_current_directory
@@ -38,7 +36,6 @@ class AOCAssistant:
 
         BINDING_DIR.mkdir(parents=True, exist_ok=True)
         self._init_jupyter_docker()
-        # self._init_jupyter_server()
         self._init_assistant()
 
     async def run(
@@ -113,15 +110,6 @@ class AOCAssistant:
         self._executor = DockerJupyterCodeExecutor(
             jupyter_server=self._jupyter_server,
             timeout=600)
-
-    def _init_jupyter_server(self) -> None:
-        self._executor = DockerJupyterCodeExecutor(
-            jupyter_server=JupyterConnectionInfo(host="127.0.0.1",
-                                                 use_https=False,
-                                                 port=8888,
-                                                 token='UNSET'),
-            output_dir=BINDING_DIR,
-        )
 
     def _init_assistant(self) -> None:
         self._model_client = OpenAILikeChatCompletionClient(

@@ -32,6 +32,7 @@ Here are the article links corresponding to each code directory:
 * [04_Monitoring_Qwen3_Agents_with_MLflow_3](https://www.dataleadsfuture.com/monitoring-qwen-3-agents-with-mlflow-3-x-end-to-end-tracking-tutorial/)
 * [05_Image_Generation_Workflow](https://www.dataleadsfuture.com/use-llamaindex-workflow-to-create-an-ink-painting-style-image-generation-workflow/)
 * [06_Super_Teacher_Workflow](https://www.dataleadsfuture.com/i-used-autogen-graphflow-and-qwen3-coder-to-solve-math-problems-and-it-worked/)
+* [07_Complete_Advent_of_Code](https://www.dataleadsfuture.com/how-i-crushed-advent-of-code-and-solved-hard-problems-using-autogen-jupyter-executor-and-qwen3/)
 
 --------------------------------------------
 

@@ -1,20 +1,36 @@
+from pathlib import Path
+
 from autogen_ext.code_executors.docker_jupyter import (
-    DockerJupyterCodeExecutor
+    DockerJupyterCodeExecutor, DockerJupyterServer
 )
 from autogen_agentchat.messages import TextMessage
 from autogen_core import CancellationToken
 from autogen_ext.code_executors.docker_jupyter._jupyter_server import JupyterConnectionInfo
 from autogen_agentchat.agents import CodeExecutorAgent
 
+server = DockerJupyterServer(
+    custom_image_name="jupyter-server",
+    expose_port=8888,
+    token="UNSET",
+    bind_dir="temp",
+)
 
 executor = DockerJupyterCodeExecutor(
-    jupyter_server=JupyterConnectionInfo(
-        host='127.0.0.1',
-        use_https=False,
-        port=8888,
-        token='UNSET'
-    )
+    jupyter_server=server,
+    timeout=600,
+    output_dir=Path("temp")
 )
+
+# executor = DockerJupyterCodeExecutor(
+#     jupyter_server=JupyterConnectionInfo(
+#         host='127.0.0.1',
+#         use_https=False,
+#         port=8888,
+#         token='UNSET'
+#     ),
+#     timeout=600,
+#     output_dir=Path("temp"),
+# )
 
 code_executor = CodeExecutorAgent(
     "code_executor",

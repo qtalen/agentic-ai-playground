@@ -48,23 +48,23 @@ if __name__ == "__main__":
                 content=dedent("""
                 ```python
                 x = 1+2
-                x
+                print("Round one: The calculation for the value of x is done.")
                 ```
                 """),
                 source="user"
             )
             response1 = await code_executor.on_messages(messages=[code1], cancellation_token=CancellationToken())
-            print(response1.chat_message)
+            print(response1.chat_message.content)
 
             code2 = TextMessage(
                 content=dedent("""
                 ```python
-                print(x)
+                print("Round two: Get the value of variable x again: x=", x)
                 ```
                 """),
                 source="user",
             )
             response2 = await code_executor.on_messages(messages=[code2], cancellation_token=CancellationToken())
-            print(response2.chat_message)
+            print(response2.chat_message.content)
 
     asyncio.run(main())

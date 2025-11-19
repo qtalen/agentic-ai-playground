@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  jupyter:
+    image: jupyter-server
+    container_name: jupyter-server
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./temp:/app
+    networks:
+      - docker_executor
+networks:
+  docker_executor:
+    driver: bridge

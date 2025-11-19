@@ -26,6 +26,8 @@ dependencies = [
     "hf-xet",
     "rapidocr",
     "onnxruntime",
+    "langchain",
+    "langchain[openai]",
 ]
 
 [build-system]

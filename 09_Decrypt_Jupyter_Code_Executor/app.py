@@ -21,6 +21,8 @@ team = RoundRobinGroupChat(
 if __name__ == "__main__":
     async def main():
         async with executor:
-            await Console(team.run_stream(task="Two jars contain milk and water in the ratio 5: 4 and 2: 1 regpectively. What volume should be taken out from the first jar if volumes have to be taken out from both jars so as to fill up a third 30 l jar with milk to water in the ratio 1: 1 ?"))
+            await Console(
+                team.run_stream(task="Read the superstore.csv file and find the total sales for each region.")
+            )
 
     asyncio.run(main())

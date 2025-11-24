@@ -58,6 +58,7 @@ print(x)
 
 code_writer = AssistantAgent(
     "code_writer",
+    description="A helper that turns the given tasks into executable Python code.",
     model_client=model_client,
     system_message=SYSTEM_PROMPT,
 )

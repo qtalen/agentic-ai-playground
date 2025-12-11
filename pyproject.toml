@@ -1,13 +1,12 @@
 [project]
 name = "agent-ai-playground"
-version = "0.8.0"
+version = "0.10.0"
 description = 'This repo contains the source code for my Agentic AI series.'
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "python-dotenv",
     "tavily-python",
-    "openai",
     "llama-index-llms-openai-like",
     "llama-index",
     "chainlit",
@@ -20,7 +19,6 @@ dependencies = [
     "mlflow>=3.1",
     "nbclient",
     "starlette>=0.48",
-    "cognee>=0.3.6",
     "docling",
     "docling[vlm]",
     "hf-xet",
@@ -28,6 +26,8 @@ dependencies = [
     "onnxruntime",
     "langchain",
     "langchain[openai]",
+    "mcp>=1.20",
+    "agent-framework>=1.0.0b251209",
 ]
 
 [build-system]

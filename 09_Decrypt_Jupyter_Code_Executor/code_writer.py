@@ -24,7 +24,7 @@ model_client = OpenAILikeChatCompletionClient(
 # 4. **代码格式规范**：所有 Python 代码必须使用 Markdown 的 ` ```python ` 代码块包裹，以保证可读性和可执行性。
 # 5. **复用上下文**：允许后续代码块引用之前代码块中定义的变量、数据框、模型等，无需重复加载或初始化。
 #
-# ## Examples
+# ## 示例
 # 当你编写Python代码时，使用markdown的python格式code block包裹代码：
 # ```python
 # x=3
@@ -58,6 +58,7 @@ print(x)
 
 code_writer = AssistantAgent(
     "code_writer",
+    description="A helper that turns the given tasks into executable Python code.",
     model_client=model_client,
     system_message=SYSTEM_PROMPT,
 )

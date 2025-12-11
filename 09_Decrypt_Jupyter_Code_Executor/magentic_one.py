@@ -33,4 +33,4 @@ async def main(task: str):
 
 if __name__ == "__main__":
     # asyncio.run(main("Read the superstore.csv file and give me some insight about the sales of each region."))
-    asyncio.run(main("阅读`研发效能产品需求明细.xlsx`，然后从名为**产品组**列的维度，分析**待验收阶段累计停留时长**"))
+    asyncio.run(main("阅读`研发效能产品需求明细.xlsx`"))

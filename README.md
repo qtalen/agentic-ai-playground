@@ -35,6 +35,7 @@ Here are the article links corresponding to each code directory:
 * [07_Complete_Advent_of_Code](https://www.dataleadsfuture.com/how-i-crushed-advent-of-code-and-solved-hard-problems-using-autogen-jupyter-executor-and-qwen3/)
 * [08_DeepSeek_OCR_Agentic_RAG](https://www.dataleadsfuture.com/how-to-use-deepseek-ocr-and-docling-for-pdf-parsing/)
 * [09_Decrypt_Jupyter_Code_Executor](https://www.dataleadsfuture.com/exclusive-reveal-code-sandbox-tech-behind-manus-and-claude-agent-skills/)
+* [10_Agent_Framework_Qwen3_DeepSeek](https://www.dataleadsfuture.com/make-microsoft-agent-frameworks-structured-output-work-with-qwen-and-deepseek-models/)
 
 --------------------------------------------
 

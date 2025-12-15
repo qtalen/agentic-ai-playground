@@ -8,36 +8,41 @@ from agent_framework import ChatMessage, ChatOptions, TextContent
 
 class OpenAILikeChatClient(OpenAIChatClient):
     @override
-    def _prepare_options(
-            self,
-            messages: MutableSequence[ChatMessage],
-            chat_options: ChatOptions) -> dict[str, Any]:
-        chat_options_copy = deepcopy(chat_options) # 1
+    def _prepare_options(self, messages: MutableSequence[ChatMessage], chat_options: ChatOptions) -> dict[str, Any]:
+        chat_options_copy = deepcopy(chat_options)
+
         if (
             chat_options.response_format
             and isinstance(chat_options.response_format, type)
             and issubclass(chat_options.response_format, BaseModel)
         ):
-            structured_output_prompt = (
-                self._build_structured_prompt(chat_options.response_format)) # 2
-
-            if len(messages) >= 1: # 3
-                first_message = messages[0]
-                if str(first_message.role) == "system": # 4
-                    new_system_message = ChatMessage(
-                        role="system",
-                        text=f"{first_message.text} {structured_output_prompt}"
-                    )
-                    messages = [new_system_message, *messages[1:]]
-                else:
-                    new_system_message = ChatMessage( # 5
-                        role="system",
-                        text=f"{structured_output_prompt}"
-                    )
-                    messages = [new_system_message, *messages]
-
+            structured_output_prompt = self._build_structured_prompt(chat_options.response_format)
+            messages = self._add_system_msg(messages, structured_output_prompt)
             chat_options_copy.response_format = {"type": "json_object"}
+
         return super()._prepare_options(messages, chat_options_copy)
+
+    @staticmethod
+    def _add_system_msg(
+        orig_messages: MutableSequence[ChatMessage], addition_msg: str
+    ) -> MutableSequence[ChatMessage]:
+        if len(orig_messages) < 1:
+            return orig_messages
+
+        first_message = orig_messages[0]
+        if str(first_message.role) == "system":
+            new_system_message = ChatMessage(
+                role="system",
+                text=f"{first_message.text} {addition_msg}"
+            )
+            messages = [new_system_message, *orig_messages[1:]]
+        else:
+            new_system_message = ChatMessage(
+                role="system",
+                text=f"{addition_msg}"
+            )
+            messages = [new_system_message, *orig_messages]
+        return messages
 
     @staticmethod
     def _build_structured_prompt(response_format: type[BaseModel]) -> str:

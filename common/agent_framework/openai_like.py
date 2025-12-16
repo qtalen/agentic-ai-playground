@@ -30,7 +30,10 @@ class OpenAILikeChatClient(OpenAIChatClient):
             return orig_messages
 
         first_message = orig_messages[0]
-        if str(first_message.role) == "system":
+        if (
+            hasattr(first_message, "role")
+            and first_message.role.value == "system"
+        ):
             new_system_message = ChatMessage(
                 role="system",
                 text=f"{first_message.text} {addition_msg}"

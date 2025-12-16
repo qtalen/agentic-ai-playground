@@ -19,6 +19,7 @@ dependencies = [
     "mlflow>=3.1",
     "nbclient",
     "starlette>=0.48",
+    "cognee>=0.5.0",
     "docling",
     "docling[vlm]",
     "hf-xet",

@@ -9,8 +9,6 @@ cd ..
 pip install --upgrade -e .
 ```
 
-One thing to note: in a previous article, I installed `cognee`, but its dependency `aiofiles` has a version conflict with the Microsoft Agent Framework. So for now, I’ve temporarily removed the `cognee` dependency—I’ll add it back once `cognee` updates.
-
 You’ll also need to create a `.env` file in the root directory and add your Qwen or DeepSeek LLM configuration there.
 
 If you want to follow along with the article’s instructions using `mlflow`, add this line to your `.env` file too:  

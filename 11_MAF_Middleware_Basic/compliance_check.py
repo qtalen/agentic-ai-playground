@@ -20,9 +20,11 @@ from common.utils.project_path import get_project_root
 
 load_dotenv(get_project_root() / ".env")
 
+
 class ReviewResults(BaseModel):
     is_compliance: Literal[1, 0] = Field(..., description="If compliant, it’s 1, if not compliant, it’s 0."),
     reason: str = Field(..., description="What’s the reason for non-compliance?")
+
 
 class ComplianceCheckMiddleware(ChatMiddleware):
     def __init__(self, *args, **kwargs):
@@ -38,14 +40,14 @@ class ComplianceCheckMiddleware(ChatMiddleware):
         if not check_result.is_compliance:
             self._output_result(
                 context,
-                f"We can’t keep providing the service because:\n{fill(check_result.reason)}")
+                f"😒We can’t keep providing the service because:\n{fill(check_result.reason)}")
             return
 
         await next(context)
 
     @staticmethod
     def _output_result(context: ChatContext, response: str) -> None:
-        if context.is_streaming:
+        if context.is_streaming: #4
             async def output_stream() -> AsyncIterable[AgentRunResponseUpdate]:
                 yield AgentRunResponseUpdate(contents=[TextContent(text=response)])
             context.result = output_stream()
@@ -56,13 +58,13 @@ class ComplianceCheckMiddleware(ChatMiddleware):
 
     async def _get_compliance_result(self, context: ChatContext) -> ReviewResults:
         messages = [message for message in context.messages if message.role.value == "user"][-5:]
-        response = await self.agent.run(messages)
-        print(f"=================>{response.text}")
-        check_result = ReviewResults.model_validate_json(response.text)
+        response = await self.agent.run(messages) #2
+
+        check_result = ReviewResults.model_validate_json(response.text) #3
         return check_result
 
     def _init_compliant_agent(self) -> None:
-        client = AGUIChatClient(
+        client = AGUIChatClient(  #1
             endpoint="http://127.0.0.1:8888/compliance"
         )
         self.agent = client.create_agent(
@@ -93,6 +95,7 @@ async def main():
         print("\nAssistant: ")
         async for event in stream:
             print(event.text, end="", flush=True)
+        print()
 
 
 if __name__ == "__main__":

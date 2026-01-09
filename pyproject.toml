@@ -1,6 +1,6 @@
 [project]
 name = "agent-ai-playground"
-version = "0.10.0"
+version = "0.11.0"
 description = 'This repo contains the source code for my Agentic AI series.'
 readme = "README.md"
 requires-python = ">=3.12"
@@ -28,7 +28,8 @@ dependencies = [
     "langchain",
     "langchain[openai]",
     "mcp>=1.20",
-    "agent-framework>=1.0.0b251209",
+    "agent-framework>=1.0.0b251223",
+    "agent-framework-ag-ui>=1.0.0b251223",
 ]
 
 [build-system]

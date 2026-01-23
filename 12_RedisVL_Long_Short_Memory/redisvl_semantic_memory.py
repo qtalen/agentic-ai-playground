@@ -15,6 +15,7 @@ class RedisVLSemanticMemory(ContextProvider):
         thread_id: str | None = None,
         session_tag: str | None = None,
         distance_threshold: float = 0.3,
+        context_prompt: str = ContextProvider.DEFAULT_CONTEXT_PROMPT,
         redis_url: str = "redis://localhost:6379",
         embedding_model: str = "BAAI/bge-m3",
         embedding_api_key: str | None = None,
@@ -23,6 +24,7 @@ class RedisVLSemanticMemory(ContextProvider):
         self._thread_id = thread_id or "semantic_thread"
         self._session_tag = session_tag or f"session_{uuid4()}"
         self._distance_threshold = distance_threshold
+        self._context_prompt = context_prompt
         self._redis_url = redis_url
         self._embedding_model = embedding_model
         self._embedding_api_key = embedding_api_key or os.getenv("EMBEDDING_API_KEY")
@@ -63,13 +65,13 @@ class RedisVLSemanticMemory(ContextProvider):
             raw=True,
             session_tag=self._session_tag,
         )
-        context = sorted(context, key=lambda m: m['timestamp'])
-        relevant_messages = [self._back_to_chat_message(message)
-                             for message in context]
-        print("=====>The retrieved messages: ")
-        print([m.text for m in relevant_messages])
+        context = sorted(context, key=lambda
+            m: m['timestamp'])
+        line_separated_memories = "\n".join([str(m.get("content", "")) for m in context])
 
-        return Context(messages=relevant_messages)
+        return Context(messages=[
+            ChatMessage(role="user", text=f"{self._context_prompt}\n\n{line_separated_memories}")
+        ] if len(line_separated_memories) > 0 else None)
 
     def clear(self):
         self._semantic_store.clear()

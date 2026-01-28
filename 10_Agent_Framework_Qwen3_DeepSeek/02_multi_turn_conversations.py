@@ -2,8 +2,8 @@ import asyncio
 import os
 
 from dotenv import load_dotenv
-from pydantic import BaseModel, Field
-from agent_framework import AgentRunResponse
+from pydantic import BaseModel
+from agent_framework import AgentResponse
 import mlflow
 
 from common.utils.project_path import get_project_root
@@ -29,7 +29,9 @@ class ETA(BaseModel):
 agent = client.create_agent(
     instructions="You are a good assistant.",
     name="assistant",
-    response_format=OutText,
+    default_options={
+        "response_format": OutText
+    },
 )
 
 thread = agent.get_new_thread()
@@ -41,12 +43,13 @@ async def main():
     )
     print(result1.text)
 
-
-    final_response = await AgentRunResponse.from_agent_response_generator(
+    final_response = await AgentResponse.from_agent_response_generator(
         agent.run_stream(
             "How long would it take to drive there at 120 km/h?",
             thread=thread,
-            response_format=ETA,
+            options={
+                "response_format": ETA
+            },
         ),
         output_format_type=ETA
     )

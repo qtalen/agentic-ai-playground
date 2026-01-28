@@ -30,7 +30,9 @@ agent = OpenAILikeChatClient(model_id=Qwen3.NEXT).create_agent(
 async def main():
     response = await agent.run(
         "Please provide information about John Smith, who is a 35-year-old software engineer.",
-        response_format=PersonInfo,
+        options={
+            "response_format": PersonInfo
+        },
     )
     print(response.text)
 

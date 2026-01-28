@@ -6,8 +6,8 @@ from dotenv import load_dotenv
 from pydantic import BaseModel, Field
 from agent_framework import (
     AgentMiddleware, AgentRunContext,
-    AgentRunResponse, ChatMessage,
-    AgentRunResponseUpdate, TextContent,
+    AgentResponse, ChatMessage,
+    AgentResponseUpdate, Content,
     Role, AgentRunContext,
     ChatMiddleware, ChatContext
 )
@@ -40,7 +40,7 @@ class ComplianceCheckMiddleware(ChatMiddleware):
         if not check_result.is_compliance:
             self._output_result(
                 context,
-                f"😒We can’t keep providing the service because:\n{fill(check_result.reason)}")
+                f"😒 We can’t keep providing the service because:\n{fill(check_result.reason)}")
             return
 
         await next(context)
@@ -48,11 +48,11 @@ class ComplianceCheckMiddleware(ChatMiddleware):
     @staticmethod
     def _output_result(context: ChatContext, response: str) -> None:
         if context.is_streaming: #4
-            async def output_stream() -> AsyncIterable[AgentRunResponseUpdate]:
-                yield AgentRunResponseUpdate(contents=[TextContent(text=response)])
+            async def output_stream() -> AsyncIterable[AgentResponseUpdate]:
+                yield AgentResponseUpdate(contents=[Content.from_text(text=response)])
             context.result = output_stream()
         else:
-            context.result = AgentRunResponse(
+            context.result = AgentResponse(
                 messages=[ChatMessage(role=Role.ASSISTANT, text=response)]
             )
 
@@ -67,7 +67,7 @@ class ComplianceCheckMiddleware(ChatMiddleware):
         client = AGUIChatClient(  #1
             endpoint="http://127.0.0.1:8888/compliance"
         )
-        self.agent = client.create_agent(
+        self.agent = client.as_agent(
             name="compliance_agent",
             instructions="You’re a compliance officer, and you review user requests."
         )

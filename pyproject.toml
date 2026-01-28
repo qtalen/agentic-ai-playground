@@ -28,8 +28,8 @@ dependencies = [
     "langchain",
     "langchain[openai]",
     "mcp>=1.20",
-    "agent-framework>=1.0.0b251223",
-    "agent-framework-ag-ui>=1.0.0b251223",
+    "agent-framework>=1.0.0b260127",
+    "agent-framework-ag-ui>=1.0.0b260127",
     "sentence-transformers",
     "redisvl"
 ]

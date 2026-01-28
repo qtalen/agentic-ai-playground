@@ -4,8 +4,8 @@ from typing import Callable, Awaitable, AsyncIterable
 from dotenv import load_dotenv
 from agent_framework import (
     AgentRunContext, AgentMiddleware,
-    AgentRunResponseUpdate, TextContent,
-    AgentRunResponse, ChatMessage,
+    AgentResponseUpdate, Content,
+    AgentResponse, ChatMessage,
     Role
 )
 
@@ -39,11 +39,11 @@ class CreditCheckMiddleware(AgentMiddleware):
 
     def _output_result(self, context: AgentRunContext, response: str) -> None:
         if context.is_streaming:
-            async def output_stream() -> AsyncIterable[AgentRunResponseUpdate]:
-                yield AgentRunResponseUpdate(contents=[TextContent(text=response)])
+            async def output_stream() -> AsyncIterable[AgentResponseUpdate]:
+                yield AgentResponseUpdate(contents=[Content.from_text(text=response)])
             context.result = output_stream()
         else:
-            context.result = AgentRunResponse(
+            context.result = AgentResponse(
                 messsages=[ChatMessage(role=Role.ASSISTANT, text=response)]
             )
 
@@ -60,7 +60,7 @@ class CreditCheckMiddleware(AgentMiddleware):
 
 chat_client = OpenAILikeChatClient(model_id=Qwen3.NEXT)
 
-agent = chat_client.create_agent(
+agent = chat_client.as_agent(
     name="assistant",
     instructions="You are a helpful assistant. Answer the user's question in short and simple words.",
     middleware=[CreditCheckMiddleware(max_credit=3)]

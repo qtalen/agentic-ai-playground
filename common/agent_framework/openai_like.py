@@ -38,8 +38,8 @@ class OpenAILikeChatClient(OpenAIChatClient):
         json_schema = response_format.model_json_schema()
         structured_output_prompt = dedent(f"""
         <response-format>\n
-        Your response must adhere to the following JSON schema format,
-        without any Markdown syntax, and without any preface or explanation:\n
+        You must output JSON text strictly following the JSON format defined by the JSON schema below.
+        Do not include any markdown formatting, and do not include any preface or explanation:\n
         {json_schema}\n
         </response-format>
         """)

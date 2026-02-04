@@ -1,39 +1,50 @@
 [project]
 name = "agent-ai-playground"
-version = "0.12.0"
+version = "0.13.0"
 description = 'This repo contains the source code for my Agentic AI series.'
 readme = "README.md"
-requires-python = ">=3.12"
+requires-python = ">=3.13"
 dependencies = [
-    "python-dotenv",
-    "tavily-python",
-    "llama-index-llms-openai-like",
-    "llama-index",
-    "chainlit",
-    "rich",
-    "pydantic",
-    "autogen-ext[chromadb,docker,magentic-one,openai,web-surfer, docker-jupyter-executor]>=0.6.2",
-    "autogen-core>=0.6.2",
-    "autogen-agentchat>=0.6.2",
-    "mcp-server-fetch",
-    "mlflow>=3.1",
+    "jupyterlab>=4.5.2",
+    "ipywidgets>=8.1.8",
+    "autogen-agentchat>=0.7.4",
+    "autogen-core>=0.7.4",
+    "autogen-ext[chromadb,docker,magentic-one,openai,web-surfer, docker-jupyter-executor]>=0.7.4",
+    "chainlit>=2.7.2",
+    "streamlit>=1.49.0",
+    "chromadb>=1.0.20",
+    "sentence-transformers",
+    "protego>=0.5.0",
+    "mlflow>=3.7.0",
+    "nest-asyncio>=1.6.0",
+    "openai>=2.15.0",
+    "pydantic>=2.11.7",
+    "python-dotenv>=1.1.1",
+    "rich>=14.3.0",
+    "tavily-python>=0.7.12",
     "nbclient",
-    "starlette>=0.48",
     "cognee>=0.5.0",
     "docling",
     "docling[vlm]",
     "hf-xet",
     "rapidocr",
     "onnxruntime",
-    "langchain",
-    "langchain[openai]",
-    "mcp>=1.20",
     "agent-framework>=1.0.0b260127",
     "agent-framework-ag-ui>=1.0.0b260127",
-    "sentence-transformers",
-    "redisvl"
+    "redis>=6.4.0",
+    "redisvl>=0.12.1",
 ]
 
+[[tool.uv.index]]
+name = "aliyun"
+url = "https://mirrors.aliyun.com/pypi/simple/"
+
+[tool.uv.pip]
+index-url = "https://mirrors.aliyun.com/pypi/simple/"
+
+[tool.setuptools.packages.find]
+exclude = ["data", "temp"] 
+
 [build-system]
-requires = ["setuptools>=80", "wheel"]
+requires = ["setuptools>=79", "wheel"]
 build-backend = "setuptools.build_meta"

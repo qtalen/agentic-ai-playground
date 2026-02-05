@@ -1,5 +1,6 @@
 import asyncio
 import os
+import time
 from typing import Any, MutableSequence, cast
 
 from pydantic import BaseModel, Field
@@ -60,8 +61,9 @@ class LongTermMemory(ContextProvider):
 
         line_sep_memories = self._get_line_sep_memories(prompt)
 
+        start = time.monotonic()
         asyncio.create_task(self._save_memory(messages, line_sep_memories))
-
+        console.print(f"[bright_cyan]It took {time.monotonic() - start} seconds to retrieve the memory.\n")
         return Context(messages=[
             ChatMessage(role="user", text=f"{self._context_prompt}\n{line_sep_memories}")
         ] if len(line_sep_memories)>0 else None)

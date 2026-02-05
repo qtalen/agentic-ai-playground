@@ -6,7 +6,7 @@ To run the examples, first install the dependencies from the root directory:
 
 ```shell
 cd ..
-pip install --upgrade -e .
+uv sync --prerelease=allow
 ```
 
 You’ll also need to create a `.env` file in the root directory and add your Qwen or DeepSeek LLM configuration there.

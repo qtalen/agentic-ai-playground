@@ -4,7 +4,7 @@ To run this project, you should first install it along with its needed dependenc
 
 ```shell
 cd ..
-pip install --upgrade -e .
+uv sync --prerelease=allow
 ```
 
 Next, just like in the article, add the `API KEY` and `BASE URL` for DeepSeek-OCR, LLM, and the Embedding model into the `.env` file.

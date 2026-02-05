@@ -2,7 +2,7 @@ import asyncio
 import os
 
 from dotenv import load_dotenv
-import mlflow
+# import mlflow
 
 from common.utils.project_path import get_project_root
 from common.models import Qwen3
@@ -10,19 +10,16 @@ from common.agent_framework.openai_like import OpenAILikeChatClient
 from redisvl_long_term_memory import LongTermMemory
 
 load_dotenv(get_project_root() / ".env")
-mlflow.set_tracking_uri(os.environ.get("MLFLOW_TRACKING_URI"))
-mlflow.set_experiment("Default")
-mlflow.openai.autolog()
-
-memory_provider = LongTermMemory(
-)
+# mlflow.set_tracking_uri(os.environ.get("MLFLOW_TRACKING_URI"))
+# mlflow.set_experiment("Default")
+# mlflow.openai.autolog()
 
 agent = OpenAILikeChatClient(
     model_id=Qwen3.MAX
 ).as_agent(
     name="assistant",
     instructions="You are a helpful assistant.",
-    context_provider=memory_provider,
+    context_provider=LongTermMemory(),
 )
 
 async def main():

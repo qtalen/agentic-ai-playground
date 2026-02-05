@@ -4,7 +4,7 @@ To test-run this code, you'll need to install the dependencies first:
 
 ```shell
 cd ..
-pip install -e .
+uv sync --prerelease=allow
 ```
 
 Description of the source files:

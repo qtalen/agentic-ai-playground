@@ -4,7 +4,7 @@ To run this project, you should first install the dependencies:
 
 ```shell
 cd ..
-pip install -e .
+uv sync --prerelease=allow
 ```
 
 Next, create a `.env` file to store your LLM's API settings.

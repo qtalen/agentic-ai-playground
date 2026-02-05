@@ -4,7 +4,7 @@ First, you'll need to install some dependencies from the root directory. Since I
 
 ```shell
 cd ..
-pip install -e . --pre
+uv sync --prerelease=allow
 ```
 
 If you'd like to use an OpenAI-compatible embedding model deployed on a server, you'll also need to update your `.env` file by adding the following keys:

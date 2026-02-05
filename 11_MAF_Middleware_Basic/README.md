@@ -4,7 +4,7 @@ You’ll need to install the project dependencies from the root directory first:
 
 ```shell
 cd ..
-pip install --upgrade e .
+uv sync --prerelease=allow
 ```  
 
 You’ll also need to create a `.env` file in the root directory to store your LLM API key and base URL.  

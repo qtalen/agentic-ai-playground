@@ -4,7 +4,7 @@ To run this code, first install the dependencies:
 
 ```shell
 cd ..
-pip install -e .
+uv sync --prerelease=allow
 ```
 
 Next, create a `.env_deepseek` file to store the LLM API settings.

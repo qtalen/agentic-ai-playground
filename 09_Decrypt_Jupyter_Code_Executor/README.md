@@ -4,7 +4,7 @@ First, go to the project root and install the dependencies:
 
 ```shell
 cd ..
-pip install --upgrade -e .
+uv sync --prerelease=allow
 ```
 
 Then, create a `.env` file in the root folder and put your LLM settings in it. You can check the `.env.example` file for reference.

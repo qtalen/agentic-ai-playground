@@ -38,6 +38,7 @@ Here are the article links corresponding to each code directory:
 * [10_Agent_Framework_Qwen3_DeepSeek](https://www.dataleadsfuture.com/make-microsoft-agent-frameworks-structured-output-work-with-qwen-and-deepseek-models/)
 * [11_MAF_Middleware_Basic](https://www.dataleadsfuture.com/microsoft-agent-framework-maf-middleware-basics-add-compliance-fences-to-your-agent/)
 * [12_RedisVL_Long_Short_Memory](https://www.dataleadsfuture.com/build-long-term-and-short-term-memory-for-agents-using-redisvl/)
+* [13_RedisVL_Long_Term_Memory_Updated](https://www.dataleadsfuture.com/advanced-redisvl-long-term-memory-tutorial-using-an-llm-to-extract-memories/)
 
 --------------------------------------------
 

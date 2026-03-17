@@ -1,6 +1,11 @@
 from enum import StrEnum
 
 
+class Qwen3_5(StrEnum):
+    PLUS = "qwen3.5-plus"
+
+    Q397B_A17B = "qwen3.5-397b-a17b"
+
 class Qwen3(StrEnum):
     MAX = "qwen3-max"
     PLUS = "qwen-plus-latest"

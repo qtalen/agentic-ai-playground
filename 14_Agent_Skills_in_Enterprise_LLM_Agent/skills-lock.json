@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "tavily-best-practices": {
+      "source": "tavily-ai/skills",
+      "sourceType": "github",
+      "computedHash": "b1912363d3ad92011952118994dbf9e01bcd6544aab166f9bf1ce243cd44f7a0"
+    }
+  }
+}

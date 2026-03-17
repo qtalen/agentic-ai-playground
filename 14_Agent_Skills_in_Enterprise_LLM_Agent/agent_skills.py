@@ -2,8 +2,6 @@ import asyncio
 import os
 from functools import lru_cache
 from textwrap import dedent
-from pathlib import Path
-import shutil
 
 from dotenv import load_dotenv
 from agent_framework import (
@@ -47,13 +45,6 @@ async def get_latest_skills() -> list[Skill]:
     return [code_style_skill]
 
 work_dir = get_current_directory()/"temp/docker_temp"
-
-def my_runner(skill: Skill, script: SkillScript, args: dict | None = None) -> str:
-    src = Path(skill.path) / script.path
-    dst = Path(work_dir / script.path)
-    dst.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy(src, dst)
-
 
 skills_provider = UpdatableSkillsProvider(
     skill_paths=get_current_directory() / ".agents/skills",

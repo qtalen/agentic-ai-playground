@@ -1,0 +1,7 @@
+numpy
+tavily-python
+pandas
+sympy
+scipy
+seaborn
+polars

@@ -39,6 +39,7 @@ Here are the article links corresponding to each code directory:
 * [11_MAF_Middleware_Basic](https://www.dataleadsfuture.com/microsoft-agent-framework-maf-middleware-basics-add-compliance-fences-to-your-agent/)
 * [12_RedisVL_Long_Short_Memory](https://www.dataleadsfuture.com/build-long-term-and-short-term-memory-for-agents-using-redisvl/)
 * [13_RedisVL_Long_Term_Memory_Updated](https://www.dataleadsfuture.com/advanced-redisvl-long-term-memory-tutorial-using-an-llm-to-extract-memories/)
+* [14_Agent_Skills_in_Enterprise_LLM_Agent](https://github.com/qtalen/agentic-ai-playground/tree/v0.14.1)
 
 --------------------------------------------
 

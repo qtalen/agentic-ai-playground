@@ -1,4 +1,4 @@
-This repository is the source code for my latest article [Reflection SDD: Use a Reflection Harness to Level Up Your OpenSpec Workflow](https://www.dataleadsfuture.com/).
+This repository is the source code for my latest article [Reflection SDD: Use a Reflection Harness to Level Up Your OpenSpec Workflow](https://www.dataleadsfuture.com/reflection-sdd-use-a-reflection-harness-to-level-up-your-openspec-workflow/).
 
 In this repo:
 

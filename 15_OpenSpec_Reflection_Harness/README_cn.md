@@ -1,4 +1,4 @@
-本代码库是我的最新文章[Reflection SDD: Use a Reflection Harness to Level Up Your OpenSpec Workflow](https://www.dataleadsfuture.com/)的源代码。
+本代码库是我的最新文章[Reflection SDD: Use a Reflection Harness to Level Up Your OpenSpec Workflow](https://www.dataleadsfuture.com/reflection-sdd-use-a-reflection-harness-to-level-up-your-openspec-workflow/)的源代码。
 
 其中：
 
